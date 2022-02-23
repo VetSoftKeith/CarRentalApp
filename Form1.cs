@@ -18,28 +18,39 @@ namespace Car_Rental_App
 
             string[] errMsg = Array.Empty<string>();
 
-            if (string.IsNullOrWhiteSpace(customerName))
+            try
+            {
+                if (string.IsNullOrWhiteSpace(customerName))
+                {
+                    Array.Resize(ref errMsg, errMsg.Length + 1);
+                    errMsg[^1] = "Error: Customer Name is required.";
+                }
+
+                if (string.IsNullOrWhiteSpace(carType))
+                {
+                    Array.Resize(ref errMsg, errMsg.Length + 1);
+                    errMsg[^1] = "Error: Car Type is required.";
+                }
+
+                if (dateOut > dateIn)
+                {
+                    Array.Resize(ref errMsg, errMsg.Length + 1);
+                    errMsg[^1] = "Error: A car cannot be returned before it was rented!";
+                }
+            }
+            catch (Exception ex)
             {
                 Array.Resize(ref errMsg, errMsg.Length + 1);
-                errMsg[^1] = "Customer Name is required.";
+                errMsg[^1] = "Error: Unknown error!";
             }
-
-            if (string.IsNullOrWhiteSpace(carType))
+            finally
             {
-                Array.Resize(ref errMsg, errMsg.Length + 1);
-                errMsg[^1] = "Car Type is required.";
+                if (errMsg.Length != 0)
+                {
+                    MessageBox.Show(string.Join("\n\r", errMsg), "Ruh Roh!!", MessageBoxButtons.OK);
+                }
             }
-
-            if (dateOut > dateIn)
-            {
-                Array.Resize(ref errMsg, errMsg.Length + 1);
-                errMsg[^1] = "A car cannot be returned before it was rented!";
-            }
-
-            if (errMsg.Length != 0)
-            {
-                MessageBox.Show(string.Join("\n\r", errMsg), "Ruh Roh!!", MessageBoxButtons.OK);
-            }
+           
         }
     }
 }
