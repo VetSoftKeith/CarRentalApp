@@ -171,6 +171,7 @@ namespace Car_Rental_App
             this.viewCustomerToolStripMenuItem.Name = "viewCustomerToolStripMenuItem";
             this.viewCustomerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.viewCustomerToolStripMenuItem.Text = "View Customers";
+            this.viewCustomerToolStripMenuItem.Click += new System.EventHandler(this.ViewCustomerToolStripMenuItem_Click);
             // 
             // updateCustomerToolStripMenuItem
             // 

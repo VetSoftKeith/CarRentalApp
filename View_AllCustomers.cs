@@ -12,30 +12,22 @@ namespace Car_Rental_App
     using System;
     using System.Collections.Generic;
     
-    public partial class Customer
+    public partial class View_AllCustomers
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Customer()
-        {
-            this.CarRentalRecords = new HashSet<CarRentalRecord>();
-        }
-    
-        public int id { get; set; }
-        public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string FirstName { get; set; }
         public string StreetAddress { get; set; }
         public string City { get; set; }
         public string State { get; set; }
         public int ZipCode { get; set; }
         public byte InsuranceVerified { get; set; }
-        public int InsuranceCompany { get; set; }
         public System.DateTime InsuranceExpirationDate { get; set; }
+        public string Insurance_Co_ { get; set; }
+        public int Insurance_Co___ { get; set; }
+        public int InsuranceCompany { get; set; }
+        public string Insurance_Co__State { get; set; }
         public System.DateTime CreatedAt { get; set; }
         public System.DateTime UpdatedAt { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CarRentalRecord> CarRentalRecords { get; set; }
-        public virtual InsuranceComany InsuranceComany { get; set; }
-        public virtual State State1 { get; set; }
+        public int id { get; set; }
     }
 }

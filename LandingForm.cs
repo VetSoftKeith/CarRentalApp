@@ -29,5 +29,15 @@ namespace Car_Rental_App
 
             frmAddCustomer.Show();
         }
+
+        private void ViewCustomerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmViewCustomers frmViewCustomers = new FrmViewCustomers()
+            {
+                MdiParent = this
+            };
+
+            frmViewCustomers.Show();
+        }
     }
 }

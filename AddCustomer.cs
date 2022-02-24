@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Windows.Forms;
@@ -8,16 +7,26 @@ namespace Car_Rental_App
 {
     public partial class FrmAddCustomer : Form
     {
+        private readonly Form owningForm = null;
+
         public FrmAddCustomer()
         {
             InitializeComponent();
+        }
+
+        public FrmAddCustomer(Form frm)
+        {
+            InitializeComponent();
+
+            this.owningForm = frm;
         }
 
         private void FrmAddCustomer_Load(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Maximized;
 
-            List<State> stateList = Globals.db.States.ToList();
+            // List<State> stateList = Globals.db.States.ToList();
+            var stateList = Globals.db.States.ToList();
 
             cbState.ValueMember = "Code";
             cbState.DisplayMember = "Name";
@@ -101,7 +110,7 @@ namespace Car_Rental_App
             try
             {
                 Globals.db.Customers.Add(customerRecord);
-                Globals.db.SaveChanges();
+                Globals.db.SaveChangesAsync();
 
             }
             catch (DbEntityValidationException ex)
@@ -138,6 +147,129 @@ namespace Car_Rental_App
 
                     default:
                         this.Close();
+                        break;
+                }
+            }
+        }
+
+        private void TbFirstName_TextChanged(object sender, EventArgs e)
+        {
+            if (ValidateForm())
+            {
+                btnSubmit.Enabled = true;
+            }
+            else
+            {
+                btnSubmit.Enabled = false;
+            }
+        }
+
+        private void TbLastName_TextChanged(object sender, EventArgs e)
+        {
+            if (ValidateForm())
+            {
+                btnSubmit.Enabled = true;
+            }
+            else
+            {
+                btnSubmit.Enabled = false;
+            }
+        }
+
+        private void TbStreetAddress_TextChanged(object sender, EventArgs e)
+        {
+            if (ValidateForm())
+            {
+                btnSubmit.Enabled = true;
+            }
+            else
+            {
+                btnSubmit.Enabled = false;
+            }
+        }
+
+        private void TbCity_TextChanged(object sender, EventArgs e)
+        {
+            if (ValidateForm())
+            {
+                btnSubmit.Enabled = true;
+            }
+            else
+            {
+                btnSubmit.Enabled = false;
+            }
+        }
+
+        private void TbZipCode_TextChanged(object sender, EventArgs e)
+        {
+            if (ValidateForm())
+            {
+                btnSubmit.Enabled = true;
+            }
+            else
+            {
+                btnSubmit.Enabled = false;
+            }
+        }
+
+        private bool ValidateForm()
+        {
+            bool lastNameComplete = false;
+            bool firstNameComplete = false;
+            bool addressComplete = false;
+            bool cityComplete = false;
+            bool stateComplete = false;
+            bool zipCodeComplete = false;
+
+            if (!string.IsNullOrWhiteSpace(tbLastName.Text) && tbLastName.TextLength > 1 && tbLastName.TextLength <= 50)
+            {
+                lastNameComplete = true;
+            }
+
+            if (!string.IsNullOrWhiteSpace(tbFirstName.Text) && tbFirstName.TextLength > 1 && tbFirstName.TextLength <= 50)
+            {
+                firstNameComplete = true;
+            }
+
+            if (!string.IsNullOrWhiteSpace(tbStreetAddress.Text) && tbStreetAddress.TextLength > 1 && tbStreetAddress.TextLength <= 250)
+            {
+                addressComplete = true;
+            }
+
+            if (!string.IsNullOrWhiteSpace(tbCity.Text) && tbCity.TextLength > 1 && tbCity.TextLength <= 50)
+            {
+                cityComplete = true;
+            }
+
+            if (!string.IsNullOrWhiteSpace(cbState.SelectedValue.ToString()))
+            {
+                stateComplete = true;
+            }
+
+            if (!string.IsNullOrWhiteSpace(tbZipCode.Text) && tbZipCode.TextLength == 5)
+            {
+                zipCodeComplete = true;
+            }
+
+            return lastNameComplete && firstNameComplete && addressComplete && cityComplete && stateComplete && zipCodeComplete;
+        }
+
+        private void FrmAddCustomer_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (this.owningForm != null)
+            {
+                switch(this.owningForm.GetType().Name)
+                {
+                    case "FrmViewCustomers":
+                        FrmViewCustomers frmViewCustomers = new FrmViewCustomers()
+                        {
+                            MdiParent = this.MdiParent
+                        };
+
+                        this.Hide();
+                        frmViewCustomers.Show();
+                        this.Close();
+                        this.Dispose();
                         break;
                 }
             }

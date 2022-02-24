@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CarRentalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CarRentalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CarRentalRecord">
           <Key>
             <PropertyRef Name="id" />
@@ -64,6 +64,84 @@
           <Property Name="Code" Type="char" MaxLength="2" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CarRental.dbo.View_AllCarsByMake' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="View_AllCarsByMake">
+          <Key>
+            <PropertyRef Name="CarMake" />
+            <PropertyRef Name="CarModel" />
+            <PropertyRef Name="CarYear" />
+            <PropertyRef Name="Status" />
+          </Key>
+          <Property Name="CarMake" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CarModel" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CarYear" Type="int" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CarRental.dbo.View_AllCarsByModel' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="View_AllCarsByModel">
+          <Key>
+            <PropertyRef Name="CarMake" />
+            <PropertyRef Name="CarModel" />
+            <PropertyRef Name="CarYear" />
+            <PropertyRef Name="Status" />
+          </Key>
+          <Property Name="CarMake" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CarModel" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CarYear" Type="int" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CarRental.dbo.View_AllCarsByYear' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="View_AllCarsByYear">
+          <Key>
+            <PropertyRef Name="CarMake" />
+            <PropertyRef Name="CarModel" />
+            <PropertyRef Name="CarYear" />
+            <PropertyRef Name="Status" />
+          </Key>
+          <Property Name="CarMake" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CarModel" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CarYear" Type="int" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'CarRental.dbo.View_AllCustomers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="View_AllCustomers">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="LastName" />
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="StreetAddress" />
+            <PropertyRef Name="City" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="ZipCode" />
+            <PropertyRef Name="InsuranceVerified" />
+            <PropertyRef Name="InsuranceExpirationDate" />
+            <PropertyRef Name="Insurance Co." />
+            <PropertyRef Name="Insurance Co. #" />
+            <PropertyRef Name="InsuranceCompany" />
+            <PropertyRef Name="Insurance Co. State" />
+            <PropertyRef Name="CreatedAt" />
+            <PropertyRef Name="UpdatedAt" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="StreetAddress" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="City" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="State" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="ZipCode" Type="int" Nullable="false" />
+          <Property Name="InsuranceVerified" Type="tinyint" Nullable="false" />
+          <Property Name="InsuranceExpirationDate" Type="datetime" Nullable="false" />
+          <Property Name="Insurance Co." Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Insurance Co. #" Type="int" Nullable="false" />
+          <Property Name="InsuranceCompany" Type="int" Nullable="false" />
+          <Property Name="Insurance Co. State" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedAt" Type="datetime" Nullable="false" />
+        </EntityType>
         <Association Name="FK_CarRentalRecord_Customer">
           <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
           <End Role="CarRentalRecord" Type="Self.CarRentalRecord" Multiplicity="*" />
@@ -118,6 +196,49 @@
           <EntitySet Name="InsuranceComany" EntityType="Self.InsuranceComany" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Inventory" EntityType="Self.Inventory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="States" EntityType="Self.States" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="View_AllCarsByMake" EntityType="Self.View_AllCarsByMake" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_AllCarsByMake].[CarMake] AS [CarMake], 
+    [View_AllCarsByMake].[CarModel] AS [CarModel], 
+    [View_AllCarsByMake].[CarYear] AS [CarYear], 
+    [View_AllCarsByMake].[Status] AS [Status]
+    FROM [dbo].[View_AllCarsByMake] AS [View_AllCarsByMake]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="View_AllCarsByModel" EntityType="Self.View_AllCarsByModel" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_AllCarsByModel].[CarMake] AS [CarMake], 
+    [View_AllCarsByModel].[CarModel] AS [CarModel], 
+    [View_AllCarsByModel].[CarYear] AS [CarYear], 
+    [View_AllCarsByModel].[Status] AS [Status]
+    FROM [dbo].[View_AllCarsByModel] AS [View_AllCarsByModel]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="View_AllCarsByYear" EntityType="Self.View_AllCarsByYear" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_AllCarsByYear].[CarMake] AS [CarMake], 
+    [View_AllCarsByYear].[CarModel] AS [CarModel], 
+    [View_AllCarsByYear].[CarYear] AS [CarYear], 
+    [View_AllCarsByYear].[Status] AS [Status]
+    FROM [dbo].[View_AllCarsByYear] AS [View_AllCarsByYear]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="View_AllCustomers" EntityType="Self.View_AllCustomers" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [View_AllCustomers].[id] AS [id], 
+    [View_AllCustomers].[LastName] AS [LastName], 
+    [View_AllCustomers].[FirstName] AS [FirstName], 
+    [View_AllCustomers].[StreetAddress] AS [StreetAddress], 
+    [View_AllCustomers].[City] AS [City], 
+    [View_AllCustomers].[State] AS [State], 
+    [View_AllCustomers].[ZipCode] AS [ZipCode], 
+    [View_AllCustomers].[InsuranceVerified] AS [InsuranceVerified], 
+    [View_AllCustomers].[InsuranceExpirationDate] AS [InsuranceExpirationDate], 
+    [View_AllCustomers].[Insurance Co.] AS [Insurance Co.], 
+    [View_AllCustomers].[Insurance Co. #] AS [Insurance Co. #], 
+    [View_AllCustomers].[InsuranceCompany] AS [InsuranceCompany], 
+    [View_AllCustomers].[Insurance Co. State] AS [Insurance Co. State], 
+    [View_AllCustomers].[CreatedAt] AS [CreatedAt], 
+    [View_AllCustomers].[UpdatedAt] AS [UpdatedAt]
+    FROM [dbo].[View_AllCustomers] AS [View_AllCustomers]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_CarRentalRecord_Customer" Association="Self.FK_CarRentalRecord_Customer">
             <End Role="Customer" EntitySet="Customer" />
             <End Role="CarRentalRecord" EntitySet="CarRentalRecord" />
@@ -135,8 +256,7 @@
             <End Role="Customer" EntitySet="Customer" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CarRentalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -277,7 +397,81 @@
             <End Role="States" EntitySet="States" />
             <End Role="Customer" EntitySet="Customers" />
           </AssociationSet>
+          <EntitySet Name="View_AllCarsByMake" EntityType="CarRentalModel.View_AllCarsByMake" />
+          <EntitySet Name="View_AllCarsByModel" EntityType="CarRentalModel.View_AllCarsByModel" />
+          <EntitySet Name="View_AllCarsByYear" EntityType="CarRentalModel.View_AllCarsByYear" />
+          <EntitySet Name="View_AllCustomers" EntityType="CarRentalModel.View_AllCustomers" />
         </EntityContainer>
+        <EntityType Name="View_AllCarsByMake">
+          <Key>
+            <PropertyRef Name="CarMake" />
+            <PropertyRef Name="CarModel" />
+            <PropertyRef Name="CarYear" />
+            <PropertyRef Name="Status" />
+          </Key>
+          <Property Name="CarMake" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CarModel" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CarYear" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="View_AllCarsByModel">
+          <Key>
+            <PropertyRef Name="CarMake" />
+            <PropertyRef Name="CarModel" />
+            <PropertyRef Name="CarYear" />
+            <PropertyRef Name="Status" />
+          </Key>
+          <Property Name="CarMake" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CarModel" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CarYear" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="View_AllCarsByYear">
+          <Key>
+            <PropertyRef Name="CarMake" />
+            <PropertyRef Name="CarModel" />
+            <PropertyRef Name="CarYear" />
+            <PropertyRef Name="Status" />
+          </Key>
+          <Property Name="CarMake" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CarModel" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CarYear" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="View_AllCustomers">
+          <Key>
+            <PropertyRef Name="LastName" />
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="StreetAddress" />
+            <PropertyRef Name="City" />
+            <PropertyRef Name="State" />
+            <PropertyRef Name="ZipCode" />
+            <PropertyRef Name="InsuranceVerified" />
+            <PropertyRef Name="InsuranceExpirationDate" />
+            <PropertyRef Name="Insurance_Co_" />
+            <PropertyRef Name="Insurance_Co___" />
+            <PropertyRef Name="InsuranceCompany" />
+            <PropertyRef Name="Insurance_Co__State" />
+            <PropertyRef Name="CreatedAt" />
+            <PropertyRef Name="UpdatedAt" />
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StreetAddress" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="ZipCode" Type="Int32" Nullable="false" />
+          <Property Name="InsuranceVerified" Type="Byte" Nullable="false" />
+          <Property Name="InsuranceExpirationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Insurance_Co_" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Insurance_Co___" Type="Int32" Nullable="false" />
+          <Property Name="InsuranceCompany" Type="Int32" Nullable="false" />
+          <Property Name="Insurance_Co__State" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="id" Type="Int32" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -345,6 +539,57 @@
               <MappingFragment StoreEntitySet="States">
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_AllCarsByMake">
+            <EntityTypeMapping TypeName="CarRentalModel.View_AllCarsByMake">
+              <MappingFragment StoreEntitySet="View_AllCarsByMake">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CarYear" ColumnName="CarYear" />
+                <ScalarProperty Name="CarModel" ColumnName="CarModel" />
+                <ScalarProperty Name="CarMake" ColumnName="CarMake" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_AllCarsByModel">
+            <EntityTypeMapping TypeName="CarRentalModel.View_AllCarsByModel">
+              <MappingFragment StoreEntitySet="View_AllCarsByModel">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CarYear" ColumnName="CarYear" />
+                <ScalarProperty Name="CarModel" ColumnName="CarModel" />
+                <ScalarProperty Name="CarMake" ColumnName="CarMake" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_AllCarsByYear">
+            <EntityTypeMapping TypeName="CarRentalModel.View_AllCarsByYear">
+              <MappingFragment StoreEntitySet="View_AllCarsByYear">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CarYear" ColumnName="CarYear" />
+                <ScalarProperty Name="CarModel" ColumnName="CarModel" />
+                <ScalarProperty Name="CarMake" ColumnName="CarMake" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="View_AllCustomers">
+            <EntityTypeMapping TypeName="CarRentalModel.View_AllCustomers">
+              <MappingFragment StoreEntitySet="View_AllCustomers">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="Insurance_Co__State" ColumnName="Insurance Co. State" />
+                <ScalarProperty Name="InsuranceCompany" ColumnName="InsuranceCompany" />
+                <ScalarProperty Name="Insurance_Co___" ColumnName="Insurance Co. #" />
+                <ScalarProperty Name="Insurance_Co_" ColumnName="Insurance Co." />
+                <ScalarProperty Name="InsuranceExpirationDate" ColumnName="InsuranceExpirationDate" />
+                <ScalarProperty Name="InsuranceVerified" ColumnName="InsuranceVerified" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="StreetAddress" ColumnName="StreetAddress" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

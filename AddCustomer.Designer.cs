@@ -100,6 +100,7 @@
             this.tbLastName.Name = "tbLastName";
             this.tbLastName.Size = new System.Drawing.Size(423, 22);
             this.tbLastName.TabIndex = 2;
+            this.tbLastName.TextChanged += new System.EventHandler(this.TbLastName_TextChanged);
             // 
             // lblNewRentalAgreement
             // 
@@ -117,6 +118,7 @@
             // 
             this.btnSubmit.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSubmit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnSubmit.Enabled = false;
             this.btnSubmit.Font = new System.Drawing.Font("Cooper Black", 18F);
             this.btnSubmit.Location = new System.Drawing.Point(429, 283);
             this.btnSubmit.Name = "btnSubmit";
@@ -149,6 +151,7 @@
             this.tbFirstName.Name = "tbFirstName";
             this.tbFirstName.Size = new System.Drawing.Size(420, 22);
             this.tbFirstName.TabIndex = 1;
+            this.tbFirstName.TextChanged += new System.EventHandler(this.TbFirstName_TextChanged);
             // 
             // tbStreetAddress
             // 
@@ -160,6 +163,7 @@
             this.tbStreetAddress.Name = "tbStreetAddress";
             this.tbStreetAddress.Size = new System.Drawing.Size(420, 22);
             this.tbStreetAddress.TabIndex = 3;
+            this.tbStreetAddress.TextChanged += new System.EventHandler(this.TbStreetAddress_TextChanged);
             // 
             // lblCustomerFirstName
             // 
@@ -228,6 +232,7 @@
             this.tbZipCode.Name = "tbZipCode";
             this.tbZipCode.Size = new System.Drawing.Size(210, 22);
             this.tbZipCode.TabIndex = 6;
+            this.tbZipCode.TextChanged += new System.EventHandler(this.TbZipCode_TextChanged);
             // 
             // lblZipCode
             // 
@@ -263,6 +268,7 @@
             this.tbCity.Name = "tbCity";
             this.tbCity.Size = new System.Drawing.Size(420, 22);
             this.tbCity.TabIndex = 4;
+            this.tbCity.TextChanged += new System.EventHandler(this.TbCity_TextChanged);
             // 
             // FrmAddCustomer
             // 
@@ -274,6 +280,7 @@
             this.Controls.Add(this.pnlMainLayout);
             this.Name = "FrmAddCustomer";
             this.Text = "AddCustomer";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmAddCustomer_FormClosing);
             this.Load += new System.EventHandler(this.FrmAddCustomer_Load);
             this.pnlMainLayout.ResumeLayout(false);
             this.pnlMainLayout.PerformLayout();
