@@ -136,15 +136,6 @@
     <Compile Include="State.cs">
       <DependentUpon>CarRentalDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="View_AllCarsByMake.cs">
-      <DependentUpon>CarRentalDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="View_AllCarsByModel.cs">
-      <DependentUpon>CarRentalDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="View_AllCarsByYear.cs">
-      <DependentUpon>CarRentalDB.tt</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="AddCustomer.resx">
       <DependentUpon>AddCustomer.cs</DependentUpon>
     </EmbeddedResource>
