@@ -66,46 +66,10 @@
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'CarRental.dbo.View_AllCarsByMake' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="View_AllCarsByMake">
-          <Key>
-            <PropertyRef Name="CarMake" />
-            <PropertyRef Name="CarModel" />
-            <PropertyRef Name="CarYear" />
-            <PropertyRef Name="Status" />
-          </Key>
-          <Property Name="CarMake" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="CarModel" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="CarYear" Type="int" Nullable="false" />
-          <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
-        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'CarRental.dbo.View_AllCarsByModel' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="View_AllCarsByModel">
-          <Key>
-            <PropertyRef Name="CarMake" />
-            <PropertyRef Name="CarModel" />
-            <PropertyRef Name="CarYear" />
-            <PropertyRef Name="Status" />
-          </Key>
-          <Property Name="CarMake" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="CarModel" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="CarYear" Type="int" Nullable="false" />
-          <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
-        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'CarRental.dbo.View_AllCarsByYear' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="View_AllCarsByYear">
-          <Key>
-            <PropertyRef Name="CarMake" />
-            <PropertyRef Name="CarModel" />
-            <PropertyRef Name="CarYear" />
-            <PropertyRef Name="Status" />
-          </Key>
-          <Property Name="CarMake" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="CarModel" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="CarYear" Type="int" Nullable="false" />
-          <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
-        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'CarRental.dbo.View_AllCustomers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <Association Name="FK_CarRentalRecord_Customer">
@@ -162,30 +126,6 @@ warning 6002: The table/view 'CarRental.dbo.View_AllCustomers' does not have a p
           <EntitySet Name="InsuranceCompany" EntityType="Self.InsuranceCompany" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Inventory" EntityType="Self.Inventory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="States" EntityType="Self.States" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="View_AllCarsByMake" EntityType="Self.View_AllCarsByMake" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [View_AllCarsByMake].[CarMake] AS [CarMake], 
-    [View_AllCarsByMake].[CarModel] AS [CarModel], 
-    [View_AllCarsByMake].[CarYear] AS [CarYear], 
-    [View_AllCarsByMake].[Status] AS [Status]
-    FROM [dbo].[View_AllCarsByMake] AS [View_AllCarsByMake]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="View_AllCarsByModel" EntityType="Self.View_AllCarsByModel" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [View_AllCarsByModel].[CarMake] AS [CarMake], 
-    [View_AllCarsByModel].[CarModel] AS [CarModel], 
-    [View_AllCarsByModel].[CarYear] AS [CarYear], 
-    [View_AllCarsByModel].[Status] AS [Status]
-    FROM [dbo].[View_AllCarsByModel] AS [View_AllCarsByModel]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="View_AllCarsByYear" EntityType="Self.View_AllCarsByYear" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [View_AllCarsByYear].[CarMake] AS [CarMake], 
-    [View_AllCarsByYear].[CarModel] AS [CarModel], 
-    [View_AllCarsByYear].[CarYear] AS [CarYear], 
-    [View_AllCarsByYear].[Status] AS [Status]
-    FROM [dbo].[View_AllCarsByYear] AS [View_AllCarsByYear]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_CarRentalRecord_Customer" Association="Self.FK_CarRentalRecord_Customer">
             <End Role="Customer" EntitySet="Customer" />
             <End Role="CarRentalRecord" EntitySet="CarRentalRecord" />
@@ -262,9 +202,6 @@ warning 6002: The table/view 'CarRental.dbo.View_AllCustomers' does not have a p
             <End Role="Inventory" EntitySet="Inventories" />
             <End Role="CarRentalRecord" EntitySet="CarRentalRecords" />
           </AssociationSet>
-          <EntitySet Name="View_AllCarsByMake" EntityType="CarRentalModel.View_AllCarsByMake" />
-          <EntitySet Name="View_AllCarsByModel" EntityType="CarRentalModel.View_AllCarsByModel" />
-          <EntitySet Name="View_AllCarsByYear" EntityType="CarRentalModel.View_AllCarsByYear" />
           <EntitySet Name="InsuranceCompanies" EntityType="CarRentalModel.InsuranceCompany" />
           <EntitySet Name="Customers" EntityType="CarRentalModel.Customer" />
           <AssociationSet Name="FK_CarRentalRecord_Customer" Association="CarRentalModel.FK_CarRentalRecord_Customer">
@@ -280,42 +217,6 @@ warning 6002: The table/view 'CarRental.dbo.View_AllCustomers' does not have a p
             <End Role="Customer" EntitySet="Customers" />
           </AssociationSet>
           </EntityContainer>
-        <EntityType Name="View_AllCarsByMake">
-          <Key>
-            <PropertyRef Name="CarMake" />
-            <PropertyRef Name="CarModel" />
-            <PropertyRef Name="CarYear" />
-            <PropertyRef Name="Status" />
-          </Key>
-          <Property Name="CarMake" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CarModel" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CarYear" Type="Int32" Nullable="false" />
-          <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="View_AllCarsByModel">
-          <Key>
-            <PropertyRef Name="CarMake" />
-            <PropertyRef Name="CarModel" />
-            <PropertyRef Name="CarYear" />
-            <PropertyRef Name="Status" />
-          </Key>
-          <Property Name="CarMake" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CarModel" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CarYear" Type="Int32" Nullable="false" />
-          <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="View_AllCarsByYear">
-          <Key>
-            <PropertyRef Name="CarMake" />
-            <PropertyRef Name="CarModel" />
-            <PropertyRef Name="CarYear" />
-            <PropertyRef Name="Status" />
-          </Key>
-          <Property Name="CarMake" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CarModel" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CarYear" Type="Int32" Nullable="false" />
-          <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="InsuranceCompany">
           <Key>
             <PropertyRef Name="id" />
@@ -421,36 +322,6 @@ warning 6002: The table/view 'CarRental.dbo.View_AllCustomers' does not have a p
               <MappingFragment StoreEntitySet="States">
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="View_AllCarsByMake">
-            <EntityTypeMapping TypeName="CarRentalModel.View_AllCarsByMake">
-              <MappingFragment StoreEntitySet="View_AllCarsByMake">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="CarYear" ColumnName="CarYear" />
-                <ScalarProperty Name="CarModel" ColumnName="CarModel" />
-                <ScalarProperty Name="CarMake" ColumnName="CarMake" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="View_AllCarsByModel">
-            <EntityTypeMapping TypeName="CarRentalModel.View_AllCarsByModel">
-              <MappingFragment StoreEntitySet="View_AllCarsByModel">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="CarYear" ColumnName="CarYear" />
-                <ScalarProperty Name="CarModel" ColumnName="CarModel" />
-                <ScalarProperty Name="CarMake" ColumnName="CarMake" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="View_AllCarsByYear">
-            <EntityTypeMapping TypeName="CarRentalModel.View_AllCarsByYear">
-              <MappingFragment StoreEntitySet="View_AllCarsByYear">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="CarYear" ColumnName="CarYear" />
-                <ScalarProperty Name="CarModel" ColumnName="CarModel" />
-                <ScalarProperty Name="CarMake" ColumnName="CarMake" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
