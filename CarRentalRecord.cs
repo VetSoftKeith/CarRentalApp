@@ -21,7 +21,7 @@ namespace Car_Rental_App
         public decimal Cost { get; set; }
         public Nullable<int> CarTypeId { get; set; }
     
-        public virtual Customer Customer { get; set; }
         public virtual Inventory Inventory { get; set; }
+        public virtual Customer Customer { get; set; }
     }
 }

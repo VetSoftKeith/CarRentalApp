@@ -12,10 +12,10 @@ namespace Car_Rental_App
     using System;
     using System.Collections.Generic;
     
-    public partial class InsuranceComany
+    public partial class InsuranceCompany
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public InsuranceComany()
+        public InsuranceCompany()
         {
             this.Customers = new HashSet<Customer>();
         }

@@ -26,13 +26,12 @@ namespace Car_Rental_App
         }
     
         public virtual DbSet<CarRentalRecord> CarRentalRecords { get; set; }
-        public virtual DbSet<Customer> Customers { get; set; }
-        public virtual DbSet<InsuranceComany> InsuranceComanies { get; set; }
         public virtual DbSet<Inventory> Inventories { get; set; }
         public virtual DbSet<State> States { get; set; }
         public virtual DbSet<View_AllCarsByMake> View_AllCarsByMake { get; set; }
         public virtual DbSet<View_AllCarsByModel> View_AllCarsByModel { get; set; }
         public virtual DbSet<View_AllCarsByYear> View_AllCarsByYear { get; set; }
-        public virtual DbSet<View_AllCustomers> View_AllCustomers { get; set; }
+        public virtual DbSet<InsuranceCompany> InsuranceCompanies { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
     }
 }

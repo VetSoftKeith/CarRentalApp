@@ -6,18 +6,17 @@
     <edmx:Diagrams>
       <Diagram DiagramId="9ba6881bd8f440e28126c7dbddf00671" Name="Diagram1">
         <EntityTypeShape EntityType="CarRentalModel.CarRentalRecord" Width="1.5" PointX="5.25" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CarRentalModel.Customer" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="CarRentalModel.InsuranceComany" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CarRentalModel.Inventory" Width="1.5" PointX="3" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarRentalModel.Inventory" Width="1.875" PointX="3" PointY="6.625" IsExpanded="true" />
         <EntityTypeShape EntityType="CarRentalModel.State" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
-        <AssociationConnector Association="CarRentalModel.FK_CarRentalRecord_Customer" ManuallyRouted="false" />
         <AssociationConnector Association="CarRentalModel.FK_CarRentalRecord_Inventory" ManuallyRouted="false" />
-        <AssociationConnector Association="CarRentalModel.FK_Customer_InsuranceComany" ManuallyRouted="false" />
-        <AssociationConnector Association="CarRentalModel.FK_Customer_States" ManuallyRouted="false" />
         <EntityTypeShape EntityType="CarRentalModel.View_AllCarsByMake" Width="1.5" PointX="5.375" PointY="5.75" />
         <EntityTypeShape EntityType="CarRentalModel.View_AllCarsByModel" Width="1.5" PointX="7.375" PointY="0.75" />
         <EntityTypeShape EntityType="CarRentalModel.View_AllCarsByYear" Width="1.5" PointX="7.375" PointY="3.75" />
-        <EntityTypeShape EntityType="CarRentalModel.View_AllCustomers" Width="1.5" PointX="7.375" PointY="6.75" />
+        <EntityTypeShape EntityType="CarRentalModel.InsuranceCompany" Width="1.5" PointX="0.75" PointY="9" />
+        <EntityTypeShape EntityType="CarRentalModel.Customer" Width="2.125" PointX="3" PointY="10.75" />
+        <AssociationConnector Association="CarRentalModel.FK_CarRentalRecord_Customer" />
+        <AssociationConnector Association="CarRentalModel.FK_Customer_InsuranceCompany" />
+        <AssociationConnector Association="CarRentalModel.FK_Customer_States" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

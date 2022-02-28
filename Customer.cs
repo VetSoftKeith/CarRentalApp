@@ -28,14 +28,14 @@ namespace Car_Rental_App
         public string State { get; set; }
         public int ZipCode { get; set; }
         public byte InsuranceVerified { get; set; }
-        public int InsuranceCompany { get; set; }
+        public int InsuranceCompanyId { get; set; }
         public System.DateTime InsuranceExpirationDate { get; set; }
         public System.DateTime CreatedAt { get; set; }
         public System.DateTime UpdatedAt { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CarRentalRecord> CarRentalRecords { get; set; }
-        public virtual InsuranceComany InsuranceComany { get; set; }
+        public virtual InsuranceCompany InsuranceCompany { get; set; }
         public virtual State State1 { get; set; }
     }
 }

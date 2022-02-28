@@ -49,10 +49,10 @@
             this.dgViewCustomers.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgViewCustomers.Location = new System.Drawing.Point(3, 3);
             this.dgViewCustomers.Name = "dgViewCustomers";
-            this.dgViewCustomers.ReadOnly = true;
             this.dgViewCustomers.Size = new System.Drawing.Size(794, 354);
             this.dgViewCustomers.TabIndex = 0;
             this.dgViewCustomers.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgViewCustomers_CellFormatting);
+            this.dgViewCustomers.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgViewCustomers_CellValueChanged);
             // 
             // pnlViewCustomer
             // 
@@ -98,6 +98,7 @@
             this.btnEditCustomer.TabIndex = 2;
             this.btnEditCustomer.Text = "Edit Customer";
             this.btnEditCustomer.UseVisualStyleBackColor = true;
+            this.btnEditCustomer.Click += new System.EventHandler(this.BtnEditCustomer_Click);
             // 
             // btnDeleteCustomer
             // 

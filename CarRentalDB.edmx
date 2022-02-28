@@ -28,12 +28,12 @@
           <Property Name="State" Type="char" MaxLength="2" Nullable="false" />
           <Property Name="ZipCode" Type="int" Nullable="false" />
           <Property Name="InsuranceVerified" Type="tinyint" Nullable="false" />
-          <Property Name="InsuranceCompany" Type="int" Nullable="false" />
+          <Property Name="InsuranceCompanyId" Type="int" Nullable="false" />
           <Property Name="InsuranceExpirationDate" Type="datetime" Nullable="false" />
           <Property Name="CreatedAt" Type="datetime" Nullable="false" />
           <Property Name="UpdatedAt" Type="datetime" Nullable="false" />
         </EntityType>
-        <EntityType Name="InsuranceComany">
+        <EntityType Name="InsuranceCompany">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -108,40 +108,6 @@ warning 6002: The table/view 'CarRental.dbo.View_AllCarsByYear' does not have a 
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'CarRental.dbo.View_AllCustomers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="View_AllCustomers">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="LastName" />
-            <PropertyRef Name="FirstName" />
-            <PropertyRef Name="StreetAddress" />
-            <PropertyRef Name="City" />
-            <PropertyRef Name="State" />
-            <PropertyRef Name="ZipCode" />
-            <PropertyRef Name="InsuranceVerified" />
-            <PropertyRef Name="InsuranceExpirationDate" />
-            <PropertyRef Name="Insurance Co." />
-            <PropertyRef Name="Insurance Co. #" />
-            <PropertyRef Name="InsuranceCompany" />
-            <PropertyRef Name="Insurance Co. State" />
-            <PropertyRef Name="CreatedAt" />
-            <PropertyRef Name="UpdatedAt" />
-          </Key>
-          <Property Name="id" Type="int" Nullable="false" />
-          <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="StreetAddress" Type="varchar" MaxLength="250" Nullable="false" />
-          <Property Name="City" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="State" Type="char" MaxLength="2" Nullable="false" />
-          <Property Name="ZipCode" Type="int" Nullable="false" />
-          <Property Name="InsuranceVerified" Type="tinyint" Nullable="false" />
-          <Property Name="InsuranceExpirationDate" Type="datetime" Nullable="false" />
-          <Property Name="Insurance Co." Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Insurance Co. #" Type="int" Nullable="false" />
-          <Property Name="InsuranceCompany" Type="int" Nullable="false" />
-          <Property Name="Insurance Co. State" Type="char" MaxLength="2" Nullable="false" />
-          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
-          <Property Name="UpdatedAt" Type="datetime" Nullable="false" />
-        </EntityType>
         <Association Name="FK_CarRentalRecord_Customer">
           <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
           <End Role="CarRentalRecord" Type="Self.CarRentalRecord" Multiplicity="*" />
@@ -166,15 +132,15 @@ warning 6002: The table/view 'CarRental.dbo.View_AllCustomers' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Customer_InsuranceComany">
-          <End Role="InsuranceComany" Type="Self.InsuranceComany" Multiplicity="1" />
+        <Association Name="FK_Customer_InsuranceCompany">
+          <End Role="InsuranceCompany" Type="Self.InsuranceCompany" Multiplicity="1" />
           <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="InsuranceComany">
+            <Principal Role="InsuranceCompany">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="Customer">
-              <PropertyRef Name="InsuranceCompany" />
+              <PropertyRef Name="InsuranceCompanyId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -193,7 +159,7 @@ warning 6002: The table/view 'CarRental.dbo.View_AllCustomers' does not have a p
         <EntityContainer Name="CarRentalModelStoreContainer">
           <EntitySet Name="CarRentalRecord" EntityType="Self.CarRentalRecord" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="InsuranceComany" EntityType="Self.InsuranceComany" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InsuranceCompany" EntityType="Self.InsuranceCompany" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Inventory" EntityType="Self.Inventory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="States" EntityType="Self.States" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="View_AllCarsByMake" EntityType="Self.View_AllCarsByMake" store:Type="Views" store:Schema="dbo">
@@ -220,25 +186,6 @@ warning 6002: The table/view 'CarRental.dbo.View_AllCustomers' does not have a p
     [View_AllCarsByYear].[Status] AS [Status]
     FROM [dbo].[View_AllCarsByYear] AS [View_AllCarsByYear]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="View_AllCustomers" EntityType="Self.View_AllCustomers" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [View_AllCustomers].[id] AS [id], 
-    [View_AllCustomers].[LastName] AS [LastName], 
-    [View_AllCustomers].[FirstName] AS [FirstName], 
-    [View_AllCustomers].[StreetAddress] AS [StreetAddress], 
-    [View_AllCustomers].[City] AS [City], 
-    [View_AllCustomers].[State] AS [State], 
-    [View_AllCustomers].[ZipCode] AS [ZipCode], 
-    [View_AllCustomers].[InsuranceVerified] AS [InsuranceVerified], 
-    [View_AllCustomers].[InsuranceExpirationDate] AS [InsuranceExpirationDate], 
-    [View_AllCustomers].[Insurance Co.] AS [Insurance Co.], 
-    [View_AllCustomers].[Insurance Co. #] AS [Insurance Co. #], 
-    [View_AllCustomers].[InsuranceCompany] AS [InsuranceCompany], 
-    [View_AllCustomers].[Insurance Co. State] AS [Insurance Co. State], 
-    [View_AllCustomers].[CreatedAt] AS [CreatedAt], 
-    [View_AllCustomers].[UpdatedAt] AS [UpdatedAt]
-    FROM [dbo].[View_AllCustomers] AS [View_AllCustomers]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_CarRentalRecord_Customer" Association="Self.FK_CarRentalRecord_Customer">
             <End Role="Customer" EntitySet="Customer" />
             <End Role="CarRentalRecord" EntitySet="CarRentalRecord" />
@@ -247,8 +194,8 @@ warning 6002: The table/view 'CarRental.dbo.View_AllCustomers' does not have a p
             <End Role="Inventory" EntitySet="Inventory" />
             <End Role="CarRentalRecord" EntitySet="CarRentalRecord" />
           </AssociationSet>
-          <AssociationSet Name="FK_Customer_InsuranceComany" Association="Self.FK_Customer_InsuranceComany">
-            <End Role="InsuranceComany" EntitySet="InsuranceComany" />
+          <AssociationSet Name="FK_Customer_InsuranceCompany" Association="Self.FK_Customer_InsuranceCompany">
+            <End Role="InsuranceCompany" EntitySet="InsuranceCompany" />
             <End Role="Customer" EntitySet="Customer" />
           </AssociationSet>
           <AssociationSet Name="FK_Customer_States" Association="Self.FK_Customer_States">
@@ -270,40 +217,8 @@ warning 6002: The table/view 'CarRental.dbo.View_AllCustomers' does not have a p
           <Property Name="DateReturned" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Cost" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="CarTypeId" Type="Int32" />
-          <NavigationProperty Name="Customer" Relationship="Self.FK_CarRentalRecord_Customer" FromRole="CarRentalRecord" ToRole="Customer" />
           <NavigationProperty Name="Inventory" Relationship="Self.FK_CarRentalRecord_Inventory" FromRole="CarRentalRecord" ToRole="Inventory" />
-        </EntityType>
-        <EntityType Name="Customer">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="StreetAddress" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="State" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="ZipCode" Type="Int32" Nullable="false" />
-          <Property Name="InsuranceVerified" Type="Byte" Nullable="false" />
-          <Property Name="InsuranceCompany" Type="Int32" Nullable="false" />
-          <Property Name="InsuranceExpirationDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="UpdatedAt" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="CarRentalRecords" Relationship="Self.FK_CarRentalRecord_Customer" FromRole="Customer" ToRole="CarRentalRecord" />
-          <NavigationProperty Name="InsuranceComany" Relationship="Self.FK_Customer_InsuranceComany" FromRole="Customer" ToRole="InsuranceComany" />
-          <NavigationProperty Name="State1" Relationship="Self.FK_Customer_States" FromRole="Customer" ToRole="States" />
-        </EntityType>
-        <EntityType Name="InsuranceComany">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="PhoneNumber" Type="Int32" Nullable="false" />
-          <Property Name="State" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="UpdatedAt" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Customers" Relationship="Self.FK_Customer_InsuranceComany" FromRole="InsuranceComany" ToRole="Customer" />
+          <NavigationProperty Name="Customer" Relationship="CarRentalModel.FK_CarRentalRecord_Customer" FromRole="CarRentalRecord" ToRole="Customer" />
         </EntityType>
         <EntityType Name="Inventory">
           <Key>
@@ -325,20 +240,8 @@ warning 6002: The table/view 'CarRental.dbo.View_AllCustomers' does not have a p
           </Key>
           <Property Name="Code" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Customers" Relationship="Self.FK_Customer_States" FromRole="States" ToRole="Customer" />
+          <NavigationProperty Name="Customers" Relationship="CarRentalModel.FK_Customer_States" FromRole="State" ToRole="Customer" />
         </EntityType>
-        <Association Name="FK_CarRentalRecord_Customer">
-          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
-          <End Role="CarRentalRecord" Type="Self.CarRentalRecord" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="CarRentalRecord">
-              <PropertyRef Name="CustomerId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_CarRentalRecord_Inventory">
           <End Role="Inventory" Type="Self.Inventory" Multiplicity="0..1" />
           <End Role="CarRentalRecord" Type="Self.CarRentalRecord" Multiplicity="*" />
@@ -351,57 +254,32 @@ warning 6002: The table/view 'CarRental.dbo.View_AllCustomers' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Customer_InsuranceComany">
-          <End Role="InsuranceComany" Type="Self.InsuranceComany" Multiplicity="1" />
-          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="InsuranceComany">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Customer">
-              <PropertyRef Name="InsuranceCompany" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Customer_States">
-          <End Role="States" Type="Self.State" Multiplicity="1" />
-          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="States">
-              <PropertyRef Name="Code" />
-            </Principal>
-            <Dependent Role="Customer">
-              <PropertyRef Name="State" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="CarRentalEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="CarRentalRecords" EntityType="Self.CarRentalRecord" />
-          <EntitySet Name="Customers" EntityType="Self.Customer" />
-          <EntitySet Name="InsuranceComanies" EntityType="Self.InsuranceComany" />
           <EntitySet Name="Inventories" EntityType="Self.Inventory" />
           <EntitySet Name="States" EntityType="Self.State" />
-          <AssociationSet Name="FK_CarRentalRecord_Customer" Association="Self.FK_CarRentalRecord_Customer">
-            <End Role="Customer" EntitySet="Customers" />
-            <End Role="CarRentalRecord" EntitySet="CarRentalRecords" />
-          </AssociationSet>
           <AssociationSet Name="FK_CarRentalRecord_Inventory" Association="Self.FK_CarRentalRecord_Inventory">
             <End Role="Inventory" EntitySet="Inventories" />
             <End Role="CarRentalRecord" EntitySet="CarRentalRecords" />
           </AssociationSet>
-          <AssociationSet Name="FK_Customer_InsuranceComany" Association="Self.FK_Customer_InsuranceComany">
-            <End Role="InsuranceComany" EntitySet="InsuranceComanies" />
-            <End Role="Customer" EntitySet="Customers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Customer_States" Association="Self.FK_Customer_States">
-            <End Role="States" EntitySet="States" />
-            <End Role="Customer" EntitySet="Customers" />
-          </AssociationSet>
           <EntitySet Name="View_AllCarsByMake" EntityType="CarRentalModel.View_AllCarsByMake" />
           <EntitySet Name="View_AllCarsByModel" EntityType="CarRentalModel.View_AllCarsByModel" />
           <EntitySet Name="View_AllCarsByYear" EntityType="CarRentalModel.View_AllCarsByYear" />
-          <EntitySet Name="View_AllCustomers" EntityType="CarRentalModel.View_AllCustomers" />
-        </EntityContainer>
+          <EntitySet Name="InsuranceCompanies" EntityType="CarRentalModel.InsuranceCompany" />
+          <EntitySet Name="Customers" EntityType="CarRentalModel.Customer" />
+          <AssociationSet Name="FK_CarRentalRecord_Customer" Association="CarRentalModel.FK_CarRentalRecord_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="CarRentalRecord" EntitySet="CarRentalRecords" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_InsuranceCompany" Association="CarRentalModel.FK_Customer_InsuranceCompany">
+            <End Role="InsuranceCompany" EntitySet="InsuranceCompanies" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_States" Association="CarRentalModel.FK_Customer_States">
+            <End Role="State" EntitySet="States" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="View_AllCarsByMake">
           <Key>
             <PropertyRef Name="CarMake" />
@@ -438,41 +316,75 @@ warning 6002: The table/view 'CarRental.dbo.View_AllCustomers' does not have a p
           <Property Name="CarYear" Type="Int32" Nullable="false" />
           <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="View_AllCustomers">
+        <EntityType Name="InsuranceCompany">
           <Key>
-            <PropertyRef Name="LastName" />
-            <PropertyRef Name="FirstName" />
-            <PropertyRef Name="StreetAddress" />
-            <PropertyRef Name="City" />
-            <PropertyRef Name="State" />
-            <PropertyRef Name="ZipCode" />
-            <PropertyRef Name="InsuranceVerified" />
-            <PropertyRef Name="InsuranceExpirationDate" />
-            <PropertyRef Name="Insurance_Co_" />
-            <PropertyRef Name="Insurance_Co___" />
-            <PropertyRef Name="InsuranceCompany" />
-            <PropertyRef Name="Insurance_Co__State" />
-            <PropertyRef Name="CreatedAt" />
-            <PropertyRef Name="UpdatedAt" />
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNumber" Type="Int32" Nullable="false" />
+          <Property Name="State" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Customers" Relationship="CarRentalModel.FK_Customer_InsuranceCompany" FromRole="InsuranceCompany" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="StreetAddress" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="City" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="State" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
           <Property Name="ZipCode" Type="Int32" Nullable="false" />
           <Property Name="InsuranceVerified" Type="Byte" Nullable="false" />
+          <Property Name="InsuranceCompanyId" Type="Int32" Nullable="false" />
           <Property Name="InsuranceExpirationDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Insurance_Co_" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Insurance_Co___" Type="Int32" Nullable="false" />
-          <Property Name="InsuranceCompany" Type="Int32" Nullable="false" />
-          <Property Name="Insurance_Co__State" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
           <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UpdatedAt" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CarRentalRecords" Relationship="CarRentalModel.FK_CarRentalRecord_Customer" FromRole="Customer" ToRole="CarRentalRecord" />
+          <NavigationProperty Name="InsuranceCompany" Relationship="CarRentalModel.FK_Customer_InsuranceCompany" FromRole="Customer" ToRole="InsuranceCompany" />
+          <NavigationProperty Name="State1" Relationship="CarRentalModel.FK_Customer_States" FromRole="Customer" ToRole="State" />
         </EntityType>
-      </Schema>
+        <Association Name="FK_CarRentalRecord_Customer">
+          <End Type="CarRentalModel.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="CarRentalModel.CarRentalRecord" Role="CarRentalRecord" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CarRentalRecord">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_InsuranceCompany">
+          <End Type="CarRentalModel.InsuranceCompany" Role="InsuranceCompany" Multiplicity="1" />
+          <End Type="CarRentalModel.Customer" Role="Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InsuranceCompany">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="InsuranceCompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_States">
+          <End Type="CarRentalModel.State" Role="State" Multiplicity="1" />
+          <End Type="CarRentalModel.Customer" Role="Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="State" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -487,36 +399,6 @@ warning 6002: The table/view 'CarRental.dbo.View_AllCustomers' does not have a p
                 <ScalarProperty Name="DateReturned" ColumnName="DateReturned" />
                 <ScalarProperty Name="Cost" ColumnName="Cost" />
                 <ScalarProperty Name="CarTypeId" ColumnName="CarTypeId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Customers">
-            <EntityTypeMapping TypeName="CarRentalModel.Customer">
-              <MappingFragment StoreEntitySet="Customer">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="StreetAddress" ColumnName="StreetAddress" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
-                <ScalarProperty Name="InsuranceVerified" ColumnName="InsuranceVerified" />
-                <ScalarProperty Name="InsuranceCompany" ColumnName="InsuranceCompany" />
-                <ScalarProperty Name="InsuranceExpirationDate" ColumnName="InsuranceExpirationDate" />
-                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
-                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="InsuranceComanies">
-            <EntityTypeMapping TypeName="CarRentalModel.InsuranceComany">
-              <MappingFragment StoreEntitySet="InsuranceComany">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
-                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -572,24 +454,33 @@ warning 6002: The table/view 'CarRental.dbo.View_AllCustomers' does not have a p
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="View_AllCustomers">
-            <EntityTypeMapping TypeName="CarRentalModel.View_AllCustomers">
-              <MappingFragment StoreEntitySet="View_AllCustomers">
-                <ScalarProperty Name="id" ColumnName="id" />
+          <EntitySetMapping Name="InsuranceCompanies">
+            <EntityTypeMapping TypeName="CarRentalModel.InsuranceCompany">
+              <MappingFragment StoreEntitySet="InsuranceCompany">
                 <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
                 <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
-                <ScalarProperty Name="Insurance_Co__State" ColumnName="Insurance Co. State" />
-                <ScalarProperty Name="InsuranceCompany" ColumnName="InsuranceCompany" />
-                <ScalarProperty Name="Insurance_Co___" ColumnName="Insurance Co. #" />
-                <ScalarProperty Name="Insurance_Co_" ColumnName="Insurance Co." />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="CarRentalModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
                 <ScalarProperty Name="InsuranceExpirationDate" ColumnName="InsuranceExpirationDate" />
+                <ScalarProperty Name="InsuranceCompanyId" ColumnName="InsuranceCompanyId" />
                 <ScalarProperty Name="InsuranceVerified" ColumnName="InsuranceVerified" />
                 <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
                 <ScalarProperty Name="State" ColumnName="State" />
                 <ScalarProperty Name="City" ColumnName="City" />
                 <ScalarProperty Name="StreetAddress" ColumnName="StreetAddress" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

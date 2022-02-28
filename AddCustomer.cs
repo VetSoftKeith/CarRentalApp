@@ -101,7 +101,7 @@ namespace Car_Rental_App
                 State = cbState.SelectedValue.ToString(),
                 ZipCode = Convert.ToInt32(tbZipCode.Text),
                 InsuranceVerified = Convert.ToByte(1),
-                InsuranceCompany = 1,
+                InsuranceCompanyId = 1,
                 InsuranceExpirationDate = DateTime.UtcNow,
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow
@@ -258,7 +258,7 @@ namespace Car_Rental_App
         {
             if (this.owningForm != null)
             {
-                switch(this.owningForm.GetType().Name)
+                switch (this.owningForm.GetType().Name)
                 {
                     case "FrmViewCustomers":
                         FrmViewCustomers frmViewCustomers = new FrmViewCustomers()

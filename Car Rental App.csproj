@@ -119,7 +119,7 @@
     <Compile Include="FrmViewCustomers.Designer.cs">
       <DependentUpon>FrmViewCustomers.cs</DependentUpon>
     </Compile>
-    <Compile Include="InsuranceComany.cs">
+    <Compile Include="InsuranceCompany.cs">
       <DependentUpon>CarRentalDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Inventory.cs">
@@ -143,9 +143,6 @@
       <DependentUpon>CarRentalDB.tt</DependentUpon>
     </Compile>
     <Compile Include="View_AllCarsByYear.cs">
-      <DependentUpon>CarRentalDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="View_AllCustomers.cs">
       <DependentUpon>CarRentalDB.tt</DependentUpon>
     </Compile>
     <EmbeddedResource Include="AddCustomer.resx">
